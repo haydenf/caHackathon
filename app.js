@@ -7,14 +7,14 @@
 
 
 // Get list of characters
-    async function getCharacters(offset)
+    async function getCharacters(offset=0)
     {
 
-        let data = await fetch(`${apiUrl}characters?limit=20&offset=${offset}&apikey=${apiKey}`);
+        let data = await fetch(`${apiUrl}characters?&orderBy=name&limit=20&offset=${offset}&apikey=${apiKey}`);
         let result = await data.json();
 
         let characters = result.data.results;
-
+        console.log(characters)
         for(let character in characters)
         {
             let name = characters[character].name;
@@ -69,7 +69,7 @@
 
         await console.log(series);
     }
-    getCharacters(20);
+    getCharacters();
 })();
 
 
