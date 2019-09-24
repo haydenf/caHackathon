@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 (() => 
 {
-    const apiUrl = "http://gateway.marvel.com/v1/public/";
+    const apiUrl = "https://gateway.marvel.com/v1/public/";
     const apiKey = "8a291b98a1bef1b182731afaf46f4ace";
 
     // Get list of characters

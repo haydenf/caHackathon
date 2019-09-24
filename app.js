@@ -10,7 +10,7 @@
     const app = express();
 
     // API Credentials
-    const apiUrl = "http://gateway.marvel.com/v1/public/";
+    const apiUrl = "https://gateway.marvel.com/v1/public/";
     const apiKey = "8a291b98a1bef1b182731afaf46f4ace";
     const priKey = "d31d5f19b0c51a10bdf421c405bf956eca9fa79e";
 
