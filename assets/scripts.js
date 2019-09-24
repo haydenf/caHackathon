@@ -30,24 +30,30 @@
         }    
 
         document.querySelectorAll(".character").forEach(function(el){
-            el.addEventListener("click", () => window.location.hash = el.dataset.id)
+            el.addEventListener("click", () => window.location.hash = el.dataset.id);
         });
-    };
+    }
 
 
-    async function getCharacterProfile(id)
+    async function getCharacterProfile()
     {
+        if (window.location.hash === "" || window.location.hash === undefined) return;
+
+        let id = window.location.hash.split("#")[1];
+
         const data = await fetch(`http://127.0.0.1:3000/character/${id}`);
         const res = await data.json();
 
-        
-    };
+        // Update profile element here
+
+        let profileContainer = document.getElementById("profile-container");
+        profileContainer.classList = "visible";
+    }
 
 // Get list of all Comics by character
     async function getComics(character)
     {
         let comics = fetch(`${apiUrl}characters/${character}/comics?apikey=${apiKey}`);
-
         await console.log(comics);
     }
 
@@ -56,18 +62,24 @@
     async function getSeries(character)
     {
         let series = fetch(`${apiUrl}characters/${character}/series?apikey=${apiKey}`);
-
         await console.log(series);
     }
 
     let profile = document.getElementById("profile-container");
-    document.getElementById("profile-close").addEventListener("click", () => profile.classList.remove("visible"));
-
-    window.onhashchange = () =>
+    document.getElementById("profile-close").addEventListener("click", () => closeProfile() );
+    document.addEventListener("keydown", (e) => 
     {
-        let charId = window.location.hash.split("#")[1];
-        getCharacterProfile(charId);
-    };
+        if (e.key === "Escape") closeProfile();
+    });
+
+    function closeProfile()
+    {
+        window.location.hash = "_";
+        profile.classList.remove("visible");
+    }
+
+    window.onhashchange = getCharacterProfile;
+    window.onload = getCharacterProfile;
 
     getCharacters();
 

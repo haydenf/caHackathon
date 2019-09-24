@@ -20,24 +20,14 @@
     app.get('/characters', (req, res) => res.json(marvel));
     app.get('/character/:id', (req, res) => res.json(marvel.characters[req.params.id]));
 
-
     app.listen(3000, () => console.log("listening at http://127.0.0.1:3000"));
     
     // Update Character list is expired.
     let data = fs.readFileSync('./data.json');
     let marvel = JSON.parse(data);
     let expiry = 86400000; // 24 hours 
-
     
-
-    if (Date.now() - marvel.modified > expiry)
-    {
-        getCharacters();
-    } else 
-    {
-        console.log("Data not updated.");
-    }
-
+    if (Date.now() - marvel.modified > expiry) getCharacters();
 
     // Get list of characters
     async function getCharacters()
