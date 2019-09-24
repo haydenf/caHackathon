@@ -37,7 +37,7 @@
 
     async function getCharacterProfile()
     {
-        if (window.location.hash === "" || window.location.hash === undefined) return;
+        if (window.location.hash === "" || window.location.hash === "#_") return;
 
         let id = window.location.hash.split("#")[1];
 
