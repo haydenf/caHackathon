@@ -19,11 +19,14 @@ body {
 
 header {
   width: 100%;
-  height: 125px;
+  height: 110px;
   text-align: center;
   background-color: #CE0B24;
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 2.7em, 0 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 2.7em, 0 100%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 2.1em, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 2.1em, 0 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 h1 {
@@ -31,10 +34,11 @@ h1 {
   margin: 12px;
   padding: 0 2px;
   border: solid 4px #FFF;
+  font-size: 50px;
 }
 
-.container {
-  margin: 10px;
+#container {
+  margin: 115px 10px 10px 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -47,27 +51,41 @@ h1 {
           align-items: center;
 }
 
-.container #search-container {
+#container #search-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   width: 100%;
   height: 60px;
-  margin: 10px 0;
+  margin: 0 0 10px 0;
   color: #CE0B24;
 }
 
-.container #search-container div {
+#container #search-container div {
   display: inline-block;
-  width: 200px;
   height: 60px;
   text-align: center;
-  border: solid 4px #151515;
+  line-height: 60px;
+  cursor: pointer;
 }
 
-.container #character-container {
+#container #search-container div img {
+  width: 100%;
+  height: 100%;
+}
+
+#container #search-container #random-character {
+  width: 50px;
+}
+
+#container #search-container #search-character {
+  width: 200px;
+}
+
+#container #character-container {
   width: 100%;
   height: 600px;
   display: -webkit-box;
@@ -79,7 +97,7 @@ h1 {
       flex-wrap: wrap;
 }
 
-.container #character-container .character {
+#container #character-container .character {
   width: 140px;
   height: 210px;
   margin: 5px;
@@ -91,17 +109,17 @@ h1 {
   cursor: pointer;
 }
 
-.container #character-container .character:hover {
+#container #character-container .character:hover {
   background-color: #CE0B24;
 }
 
-.container #character-container .character img {
+#container #character-container .character img {
   display: block;
   height: 140px;
   width: 140px;
 }
 
-.container #character-container .character .name {
+#container #character-container .character .name {
   padding: 5px;
   height: 70px;
   border-top: solid 4px #CE0B24;
@@ -110,25 +128,33 @@ h1 {
 
 #profile-container {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   top: calc(100vh - 40px);
   left: 0;
   z-index: 999;
-  -webkit-clip-path: polygon(0 1em, 100% 0, 100% 100%, 0% 100%);
-  clip-path: polygon(0 1em, 100% 0, 100% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0 1.15em, 100% 0, 100% 100%, 0% 100%);
+  clip-path: polygon(0 1.15em, 100% 0, 100% 100%, 0% 100%);
   -webkit-transition: top .3s;
   transition: top .3s;
   background-color: #CE0B24;
+  overflow: scroll;
+  padding-bottom: 200px;
 }
 
 #profile-container.visible {
-  top: 97px;
+  top: 78px;
 }
 
 #profile-container #profile-wrapper {
   width: 800px;
-  margin: 40px auto;
+  margin: 50px auto 20px auto;
+  padding: 0 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 #profile-container #profile-wrapper #profile-close {
@@ -145,13 +171,61 @@ h1 {
 #profile-container #profile-wrapper #profile-img-containter {
   display: inline-block;
   width: 250px;
-  border: solid 4px #FFF;
-  margin: 0 50px;
+  height: 250px;
+  border: solid 4px #151515;
+  margin-right: 10px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
 }
 
 #profile-container #profile-wrapper #profile-img-containter img {
   width: 100%;
   height: 100%;
   display: block;
+}
+
+#profile-container #profile-wrapper #profile-name {
+  display: inline-block;
+  width: 400px;
+  font-size: 40px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+
+#profile-container #profile-wrapper #profile-description {
+  font-size: 24px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  width: 100%;
+  margin: 10px 0;
+}
+
+#profile-container #comics {
+  width: 100%;
+  height: 340px;
+  background-color: #151515;
+  margin-top: 60px;
+  -webkit-clip-path: polygon(0 0, 100% 1.15em, 100% 100%, 0% 100%);
+  clip-path: polygon(0 0, 100% 1.15em, 100% 100%, 0% 100%);
+  overflow: scroll;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#profile-container #comics .comic-container {
+  width: 150px;
+  height: 231px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  margin: 10px;
+}
+
+#profile-container #comics .comic-container img {
+  width: 100%;
+  height: 100%;
 }
 /*# sourceMappingURL=styles.css.map */
