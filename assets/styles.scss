@@ -101,7 +101,7 @@ h1 {
     z-index: 999;
     -webkit-clip-path: polygon(0 1em, 100% 0, 100% 100%, 0% 100%);
     clip-path: polygon(0 1em, 100% 0, 100% 100%, 0% 100%);
-    transition: top .5s;
+    transition: top .3s;
     background-color: #CE0B24;
 
     &.visible {
