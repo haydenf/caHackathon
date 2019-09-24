@@ -1,75 +1,90 @@
 /* jshint esversion: 8 */
 (() => 
 {
-    
+    // Node Requires
+    const fs = require('fs');
+    const path = require('path');
+    const fetch = require('node-fetch'); // npm install node-fetch --save
+    const crypto = require('crypto');
+    const express = require('express'); // npm install express --save
+    const app = express();
+
+    // API Credentials
     const apiUrl = "http://gateway.marvel.com/v1/public/";
     const apiKey = "8a291b98a1bef1b182731afaf46f4ace";
+    const priKey = "d31d5f19b0c51a10bdf421c405bf956eca9fa79e";
 
-
-// Get list of characters
-    async function getCharacters(offset=0)
+    // Routes
+    app.use('/assets', express.static('assets'));
+    app.get('/', (req, res) => res.sendFile(path.join(__dirname+'/index.html')));
+    app.get('/characters', (req, res) => res.json(marvel));
+    app.listen(3000, () => console.log("listening at http://127.0.0.1:3000"));
+    
+    // Update Character list is expired.
+    let data = fs.readFileSync('./data.json');
+    let marvel = JSON.parse(data);
+    let expiry = 86400000; // 24 hours
+    
+    if (Date.now() - marvel.modified > expiry)
     {
+        getCharacters();
+    } else 
+    {
+        console.log("Data not updated.")    
+    }
 
-        let data = await fetch(`${apiUrl}characters?&orderBy=name&limit=20&offset=${offset}&apikey=${apiKey}`);
-        let result = await data.json();
 
-        let characters = result.data.results;
-        console.log(characters)
-        for(let character in characters)
-        {
-            let name = characters[character].name;
-            let thumbnail = characters[character].thumbnail.path;
-            let extension = characters[character].thumbnail.extension;
+    // Get list of characters
+    async function getCharacters()
+    {
+        marvel = {};
+        marvel.characters = [];
+
+        let offset = 0;
+        let loop = true;
         
-            let elCharacter = `<div class="character">
-                <div class="img-container">
-                    <img src="${thumbnail}.${extension}" alt="${name}">
-            </div>
-                <div class="info">
-                    <span class="name">${name}</span>
-                </div>
-             </div>`
-            document.getElementById("character-container").innerHTML += elCharacter
-            console.log(name, thumbnail, extension)
+        while (loop)
+        {
+            const time = Date.now();
+            const hash = crypto.createHash('md5').update(time + priKey + apiKey).digest("hex");
+
+            try
+            {
+                let data = await fetch(`${apiUrl}characters?&orderBy=name&limit=100&offset=${offset}&ts=${time}&apikey=${apiKey}&hash=${hash}`);
+                let result = await data.json();
+                let total = result.data.total;
+
+                console.log(offset);
+                offset += 100;
+
+                if (offset >= total) { loop = false; console.log("done"); }     ////////CHANGE TO TOTAL
+
+                let characters = result.data.results;
+                
+                for (let character in characters)
+                {
+                    let id        = characters[character].id;
+                    let name      = characters[character].name;
+                    let thumbnail = characters[character].thumbnail.path + "." + characters[character].thumbnail.extension;
+
+                    marvel.characters.push({ id, name, thumbnail });
+                }
+
+            } catch(err)
+            {
+                console.log(err);
+            }
         }
 
-        // for(let picture in characterPictures)
-        // {
-            
-            
-            
-        // }
+        marvel.modified = Date.now();
 
-       
-
-
-        // let characters = fetch(`${apiUrl}characters?limit=20&offset=${offset}&apikey=${apiKey}`).then(async (response)=> {
-        //     return await response.json();
-        // });
-        // name =  characters.data
-        // // let data = await characters.json();
-        // await console.log(name);
-             
+        fs.writeFile("./data.json", JSON.stringify(marvel), err => 
+        {
+            if (err) return console.log(err);
+            console.log("data.json has been saved.");
+        }); 
     }
     
-
-// Get list of all Comics by character
-    async function getComics(character)
-    {
-        let comics = fetch(`${apiUrl}characters/${character}/comics?apikey=${apiKey}`);
-
-        await console.log(comics);
-    }
-
-
-// Get list of all Series by character
-    async function getSeries(character)
-    {
-        let series = fetch(`${apiUrl}characters/${character}/series?apikey=${apiKey}`);
-
-        await console.log(series);
-    }
-    getCharacters();
 })();
 
 
