@@ -1,0 +1,24 @@
+{
+  "name": "jshackathon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haydenf/caHackathon.git"
+  },
+  "author": "David Baines & Hayden Fuller",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haydenf/caHackathon/issues"
+  },
+  "homepage": "https://github.com/haydenf/caHackathon#readme"
+}
