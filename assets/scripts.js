@@ -22,21 +22,28 @@
             img.src = curChar.thumbnail;
 
             char.className = "character";
+            char.setAttribute("data-id", character);
             char.appendChild(img);
             char.appendChild(name);
+            // console.log( )
+
 
             container.appendChild(char);
-        }           
+        }    
+        document.querySelectorAll(".character").forEach(function(el){
+            el.addEventListener("click", () => window.location.hash = el.dataset.id)
+        });
     }
 
 
     async function getCharacterProfile(id)
     {
-        const data = await fetch(`http://127.0.0.1:3000/character/${id}`);
+        const data = await fetch(`http://127.0.0.1:3000/character${id}`);
         const res = await data.json();
         const container = document.getElementById("character-container");
+
+
     }
-    
 
 // Get list of all Comics by character
     async function getComics(character)
@@ -56,6 +63,7 @@
     }
 
     getCharacters();
+
 })();
 
 
