@@ -18,6 +18,9 @@
     app.use('/assets', express.static('assets'));
     app.get('/', (req, res) => res.sendFile(path.join(__dirname+'/index.html')));
     app.get('/characters', (req, res) => res.json(marvel));
+    app.get('/character/:id', (req, res) => res.json(marvel.characters[req.params.id]));
+
+
     app.listen(3000, () => console.log("listening at http://127.0.0.1:3000"));
     
     // Update Character list is expired.

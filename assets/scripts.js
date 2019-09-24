@@ -28,6 +28,14 @@
             container.appendChild(char);
         }           
     }
+
+
+    async function getCharacterProfile(id)
+    {
+        const data = await fetch(`http://127.0.0.1:3000/character/${id}`);
+        const res = await data.json();
+        const container = document.getElementById("character-container");
+    }
     
 
 // Get list of all Comics by character
