@@ -15,7 +15,6 @@ body {
   font-family: "RobotoCondensed Bold", "Trebuchet MS", Helvetica, Arial, sans-serif;
   font-size: 34px;
   color: #FFF;
-  border-bottom: solid 10px #CE0B24;
 }
 
 header {
@@ -48,7 +47,7 @@ h1 {
           align-items: center;
 }
 
-#search-container {
+.container #search-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -60,7 +59,7 @@ h1 {
   color: #CE0B24;
 }
 
-#search-container div {
+.container #search-container div {
   display: inline-block;
   width: 200px;
   height: 60px;
@@ -68,7 +67,7 @@ h1 {
   border: solid 4px #151515;
 }
 
-#character-container {
+.container #character-container {
   width: 100%;
   height: 600px;
   display: -webkit-box;
@@ -80,7 +79,7 @@ h1 {
       flex-wrap: wrap;
 }
 
-.character {
+.container #character-container .character {
   width: 140px;
   height: 210px;
   margin: 5px;
@@ -92,17 +91,17 @@ h1 {
   cursor: pointer;
 }
 
-.character:hover {
+.container #character-container .character:hover {
   background-color: #CE0B24;
 }
 
-.character img {
+.container #character-container .character img {
   display: block;
   height: 140px;
   width: 140px;
 }
 
-.character .name {
+.container #character-container .character .name {
   padding: 5px;
   height: 70px;
   border-top: solid 4px #CE0B24;
