@@ -7,7 +7,7 @@
     // Get list of characters
     async function getCharacters()
     {
-        const data = await fetch("./characters");
+        const data = await fetch("/characters");
         const res = await data.json();
         const container = document.getElementById("character-container");
 
@@ -44,7 +44,7 @@
 
         let id = window.location.hash.split("#")[1];
 
-        const data = await fetch(`./character/${id}`);
+        const data = await fetch(`/character/${id}`);
         const res = await data.json();
 
         getComics(id);
