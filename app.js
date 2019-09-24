@@ -20,8 +20,11 @@
     app.get('/characters', (req, res) => res.json(marvel));
     app.get('/character/:id', (req, res) => res.json(marvel.characters[req.params.id]));
 
-    app.listen(3000, () => console.log("listening at http://127.0.0.1:3000"));
+    app.listen(process.env.PORT || 3000);
     
+
+
+
     // Update Character list is expired.
     let data = fs.readFileSync('./data.json');
     let marvel = JSON.parse(data);
