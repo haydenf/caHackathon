@@ -32,6 +32,7 @@
 
     async function getCharacterProfile(id)
     {
+        
         const data = await fetch(`http://127.0.0.1:3000/character/${id}`);
         const res = await data.json();
         const container = document.getElementById("character-container");
@@ -56,6 +57,13 @@
     }
 
     getCharacters();
+
+    let profile = document.getElementById("profile-container");
+    document.getElementById("profile-close").addEventListener("click", () => profile.classList.remove("visible"));
+
+
+    window.onhashchange = getCharacterProfile();
+
 })();
 
 

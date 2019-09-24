@@ -35,7 +35,7 @@
         getCharacters();
     } else 
     {
-        console.log("Data not updated.")    
+        console.log("Data not updated.");
     }
 
 
