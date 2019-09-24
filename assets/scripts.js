@@ -25,8 +25,6 @@
             char.setAttribute("data-id", character);
             char.appendChild(img);
             char.appendChild(name);
-            // console.log( )
-
 
             container.appendChild(char);
         }    
@@ -39,12 +37,11 @@
 
     async function getCharacterProfile(id)
     {
-
-        const data = await fetch(`http://127.0.0.1:3000/character${id}`);
+        const data = await fetch(`http://127.0.0.1:3000/character/${id}`);
         const res = await data.json();
-        const container = document.getElementById("character-container");
 
-    }
+        
+    };
 
 // Get list of all Comics by character
     async function getComics(character)
@@ -63,13 +60,16 @@
         await console.log(series);
     }
 
-    getCharacters();
-
     let profile = document.getElementById("profile-container");
     document.getElementById("profile-close").addEventListener("click", () => profile.classList.remove("visible"));
 
-    window.onhashchange = getCharacterProfile();
+    window.onhashchange = () =>
+    {
+        let charId = window.location.hash.split("#")[1];
+        getCharacterProfile(charId);
+    };
 
+    getCharacters();
 
 })();
 
