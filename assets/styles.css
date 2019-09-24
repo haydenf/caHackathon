@@ -22,8 +22,8 @@ header {
   height: 125px;
   text-align: center;
   background-color: #CE0B24;
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 82%, 0 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 82%, 0 100%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 2.7em, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 2.7em, 0 100%);
 }
 
 h1 {
@@ -106,5 +106,23 @@ h1 {
   height: 70px;
   border-top: solid 4px #CE0B24;
   font-size: 16px;
+}
+
+#profile-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: calc(100vh - 40px);
+  left: 0;
+  z-index: 999;
+  -webkit-clip-path: polygon(0 1em, 100% 0, 100% 100%, 0% 100%);
+  clip-path: polygon(0 1em, 100% 0, 100% 100%, 0% 100%);
+  -webkit-transition: top .5s;
+  transition: top .5s;
+  background-color: #CE0B24;
+}
+
+#profile-container.visible {
+  top: 97px;
 }
 /*# sourceMappingURL=styles.css.map */
