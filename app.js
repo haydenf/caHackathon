@@ -27,7 +27,7 @@
     let data = fs.readFileSync('./data.json');
     let marvel = JSON.parse(data);
     let expiry = 86400000; // 24 hours 
-    
+
     if (Date.now() - marvel.modified > expiry)
     {
         getCharacters();
@@ -71,7 +71,7 @@
                     let thumbnail    = characters[character].thumbnail.path + "." + characters[character].thumbnail.extension;
                     let description  = characters[character].description;
 
-                    marvel.characters.push({ id, name, thumbnail, description });
+                    marvel.characters.push({[id]:{name, thumbnail, description }});
                 }
 
             } catch(err)
