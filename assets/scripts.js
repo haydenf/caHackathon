@@ -45,9 +45,14 @@
         const res = await data.json();
 
         // Update profile element here
+        document.getElementById("profile-name").innerHTML = res.name;
+        document.getElementById("profile-description").innerHTML = res.description;
+        document.getElementById("profile-img").src = res.thumbnail;
+        document.getElementById("profile-img").alt = res.name;
 
         let profileContainer = document.getElementById("profile-container");
         profileContainer.classList = "visible";
+
     }
 
 // Get list of all Comics by character
