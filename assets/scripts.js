@@ -72,7 +72,6 @@
 
         for (let comic in comics)
         {
-            console.log(comics)
             let title = comics[comic].title;
             let thumbnail = comics[comic].thumbnail.path + "." + comics[comic].thumbnail.extension;
             let url = comics[comic].urls[0].url;
